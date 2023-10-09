@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatted JSON Display</title>
+    <style>
+        /* Some basic styling for the input and button */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <input type="text" id="urlInput" placeholder="Enter website URL" value="https://buildship.com/blog/introducing-buildship">
+        <button onclick="fetchAndDisplay()">Fetch and Display JSON</button>
+
+        <pre id="jsonDisplay"></pre>
+    </div>
+
+    <script>
+        function fetchAndDisplay() {
+            const inputURL = document.getElementById('urlInput').value;
+            const endpoint = `https://9z12tg.buildship.run/scrape?url=${encodeURIComponent(inputURL)}`;
+
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => {
+                    // Convert the JSON data to a pretty-printed string
+                    const formattedJson = JSON.stringify(data, null, 4);
+
+                    // Display the formatted JSON on the webpage
+                    document.getElementById('jsonDisplay').textContent = formattedJson;
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the JSON", error);
+                    document.getElementById('jsonDisplay').textContent = 'Error fetching JSON. Check the console for more details.';
+                });
+        }
+    </script>
+
+</body>
+
+</html>
