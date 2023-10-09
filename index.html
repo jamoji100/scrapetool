@@ -6,11 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formatted JSON Display</title>
     <style>
-        /* Some basic styling for the input and button */
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            text-align: center;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 40px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        pre {
+            background-color: #eee;
+            border-radius: 4px;
+            padding: 15px;
+            white-space: pre-wrap; /* Wrap text */
+            word-wrap: break-word; /* Break long words */
+            overflow-x: auto;      /* Add horizontal scroll if needed */
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -32,10 +72,7 @@
             fetch(endpoint)
                 .then(response => response.json())
                 .then(data => {
-                    // Convert the JSON data to a pretty-printed string
                     const formattedJson = JSON.stringify(data, null, 4);
-
-                    // Display the formatted JSON on the webpage
                     document.getElementById('jsonDisplay').textContent = formattedJson;
                 })
                 .catch(error => {
